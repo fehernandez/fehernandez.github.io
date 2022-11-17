@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Somos una pasteleria que cuenta con las mejores tradiciones argentinas, dignas de degustar!">
+  <meta name="description"
+    content="Somos una pasteleria que cuenta con las mejores tradiciones argentinas, dignas de degustar!">
   <meta name="keywords" content="Pasteleria, bakery, alfajores,budines, tartas, dulce">
   <meta name="author" content="Felipe Hernandez">
   <link rel="shortcut icon" href="./images/favicon.png" />
@@ -19,7 +20,7 @@
 <body>
   <!-- NAVBAR INICIO -->
   <header>
-    <nav class="navbar navbar-expand-lg bg-light p-0">
+    <nav class="navbar sticky-top navbar-expand-lg bg-light p-0">
       <div class="container-fluid bg-white">
         <a class="fecakes" href="index.html"><img src="./images/fecakes.png" alt="fe cakes logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -55,9 +56,6 @@
             <li class="nav-item">
               <a class="nav-link" href="./pages/recetas.html">Recetas</a>
             </li>
-            <li class="nav-item not-mobile">
-              <a class="nav-link" href="./pages/acerca-de.html">Acerca de</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="./pages/preguntas-frecuentes.html">Preguntas Frecuentes</a>
             </li>
@@ -69,9 +67,6 @@
   <!-- NAVBAR FINAL -->
 
   <main>
-    <div class=".container-fluid-barra bg-black text-white">
-      <h1>Inicio</h1>
-    </div>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -137,53 +132,46 @@
       </button>
     </div>
 
-    <div class="container-productos-grid">
-      <div class="productos">
-        <img src="./images/Index-img/amasando2.jpg" alt="" />
-        <p>
-          Contamos con un personal capacitado para realizar los productos de la mejor forma posible.
-        </p>
+    <div class="container-cards-grid">
+      <div class="card">
+        <img src="./images/Index-img/lemon2.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Tartas</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-outline-dark">Ir a Tartas</a>
+        </div>
       </div>
 
-      <div class="productos">
-        <img src="./images/Index-img/brownie.jpg" alt="" />
-        <p>
-          Realizamos los productos con la materia prima de mayor calidad del mercado, para asegurar una exelente calidad a nuesros clientes.
-        </p>
+      <div class="card">
+        <img src="./images/Index-img/budines.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Budines</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-outline-dark">Ir a Budines</a>
+        </div>
       </div>
 
-      <div class="productos">
-        <img src="./images/recetas-img/chocolate-acercade.jpg" alt="" />
-        <p>
-          Tenemos nuestra sucursal para que puedas pasar cuando gustes en la calle Falucho 5524 ¡Te esperamos@
-        </p>
+      <div class="card">
+        <img src="./images/Index-img/alfajor.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Alfajores</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-outline-dark">Ir a Alfajores</a>
+        </div>
       </div>
+    </div>
 
-      <div class="productos">
-        <img src="./images/recetas-img/maicena-recetas.jpg" alt="" />
-        <p>
-          Pasate por nuestro recetario para que pruebes en tu casa realizar cualquiera de los productos que gustes.
-        </p>
-      </div>
+    <div class="black-bar">
 
-      <div class="productos">
-        <img src="./images/img-productos/receta-img-3.jpg" alt="" />
-        <p>
-          ¡Cualquier sugerencia que nos puedas dar es recibida!
-        </p>
-      </div>
+      <p>Cualquier consulta no dudes en escribirnos a nuestro instagram o whatsapp</p>
 
-      <div class="productos">
-        <img src="./images/Index-img/budin.jpg" alt="" />
-        <p>
-          Nos especializamos en la produccion de budines ¡Te los recomendamos!
-        </p>
-      </div>
+      <p>Tambien podes visitar nuestro apartado de preguntas frecuentes</p>
+      <a href="./pages/preguntas-frecuentes.html" class="btn bg-white">Preguntas Frecuentes</a>
 
-      <div class="container-button-more">
-        <a href="./pages/productos.html"><button type="button" class="btn btn-outline-dark">Ver mas productos</button>
-        </a>
-      </div>
+
     </div>
 
     <!-- BOTONES FLOTANTES INICIO -->
@@ -210,7 +198,6 @@
         <li><a href="index.html">Inicio</a></li>
         <li><a href="./pages/productos.html">Productos</a></li>
         <li><a href="./pages/recetas.html">Recetas</a></li>
-        <li><a href="./pages/acerca-de.html">Acerca de</a></li>
         <li>
           <a href="./pages/preguntas-frecuentes.html">Preguntas frecuentes</a>
         </li>
