@@ -1,0 +1,21 @@
+.products-list{
+    padding: 0;
+    margin-left: 15rem;
+}
+
+.fa-sharp.fa-solid.fa-bag-shopping{
+    font-size: 1.8rem;
+}
+
+#button{
+    width: 100%;
+    font-size: 2rem;
+    border: 1px solid black;
+    margin-bottom: 3%;
+
+    :hover {
+        color: white;
+        background: black;
+        transition: all 5000ms;
+    }
+}
