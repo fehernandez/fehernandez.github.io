@@ -1,6 +1,6 @@
-// // Carrito de compras START
+// Cart Start!
 
-// Cart Start
+// DECLARATE LET AND CONST
 
 let emptyCartButton = document.getElementById('empty-cart')
 let continueCheckoutButton = document.getElementById('continue-checkout')
@@ -8,7 +8,7 @@ let modal = document.getElementsByClassName("modal-body")
 let addProducts = document.querySelectorAll('.add-product')
 let pricePerProduct
 let precioCadaProducto
-let nombreCadaProducto
+let namePerProduct
 let idCadaProducto
 let priceWithout
 let total = 0
@@ -19,12 +19,12 @@ const newLi = ""
 
 cards.forEach((card) => {
     card.addEventListener('click', (e) => {
-        leerDatosProducto(e.target.parentElement)
-        writeProductList(newLi, nombreCadaProducto)
+        readDatesProducts(e.target.parentElement)
+        writeProductList(newLi, namePerProduct)
     })
 });
 
-function leerDatosProducto(producto) {
+function readDatesProducts(producto) {
 
     const infoCadaProducto = {
         precio: producto.querySelector('.card-text').textContent,
@@ -34,13 +34,13 @@ function leerDatosProducto(producto) {
 
     precioCadaProducto = infoCadaProducto.precio.replace(/[^0-9]+/g, "");
 
-    nombreCadaProducto = infoCadaProducto.nombre
+    namePerProduct = infoCadaProducto.nombre
     idCadaProducto = Number(infoCadaProducto.id)
 
     arrayCart.push(infoCadaProducto)
 
     localStorage.setItem('precio', Number(precioCadaProducto))
-    localStorage.setItem('nombre', nombreCadaProducto)
+    localStorage.setItem('nombre', namePerProduct)
     localStorage.setItem('id', idCadaProducto)
 
     total = Number(precioCadaProducto) + total
@@ -48,22 +48,64 @@ function leerDatosProducto(producto) {
     localStorage.setItem('totalPriceFinal', total)
     document.getElementById("total-price").innerHTML = 'Precio Total $ ' + total
 
-    console.log(total);
-
 }
 
-// Events/Cart
 let arrayCart = []
+
+if (localStorage.counterProduct == 0 ) {
+    document.getElementById("total-price").innerHTML = 'Precio Total $ 0' 
+}
+
 function emptyCartEvent() {
-    arrayCart = []
-    localStorage.productsList = ''
-    localStorage.counterProduct = 0
-    localStorage.totalPriceFinal = 0
-    total = 0
-    document.getElementById("number-cart").innerHTML = localStorage.counterProduct;
-    document.getElementById("total-price").innerHTML = 'Precio Total $ ' + localStorage.totalPriceFinal
-    let borrarProducts = ""
-    document.querySelector('.products-list').innerHTML = borrarProducts
+
+    if (localStorage.counterProduct != 0) {
+
+        arrayCart = []
+        localStorage.productsList = ''
+        localStorage.counterProduct = 0
+        localStorage.totalPriceFinal = 0
+        total = 0
+        document.getElementById("number-cart").innerHTML = localStorage.counterProduct;
+        document.getElementById("total-price").innerHTML = 'Precio Total $ ' + localStorage.totalPriceFinal
+        let cleanProductList = ""
+        document.querySelector('.products-list').innerHTML = cleanProductList
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Productos del carrito eliminados con exito'
+        })
+
+    } else {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'El carrito se encuentra vacio, no hay productos que eliminar'
+        })
+    }
+
 }
 
 refreshList(newLi, arrayCart)
@@ -98,19 +140,17 @@ function counterProductsEvent() {
 
 if (localStorage.counterProduct) {
     document.getElementById("number-cart").innerHTML = localStorage.counterProduct
-    
-} else{
+} else {
     localStorage.counterProduct = 0
 }
 
+// LIST OF PRODUCTS MODAL
 
-// LISTA DE PRODUCTOS EN ELMODAL
-
-function writeProductList(newLi, nombreCadaProducto) {
+function writeProductList(newLi, namePerProduct) {
 
     newLi = document.createElement('li')
 
-    newLi.innerHTML = `<li>${nombreCadaProducto + ' $' + localStorage.precio}</li>`
+    newLi.innerHTML = `<li>${namePerProduct + ' $' + localStorage.precio}</li>`
     productsList.appendChild(newLi)
     localStorage.setItem('productsList', JSON.stringify(arrayCart))
 
@@ -152,12 +192,11 @@ if (localStorage.productsList) {
     document.getElementById("total-price").innerHTML = 'Precio Total $ ' + total
 }
 
-// CART END
+// CART END !
 
 // LOGIN START !
 
-
-// DECLARACION DE VARIABLES Y CONSTANTES
+// DECLARATE LET AND CONST
 
 const signRegisterButton = document.getElementById('buttonSignRegister')
 const signWelcomeButton = document.getElementById('buttonSignWelcome')
@@ -170,7 +209,10 @@ let closeIcon = document.getElementById('close-icon')
 let personIcon = document.getElementById('person-icon')
 
 
+// EVENTS
+
 formLogin.addEventListener("submit", (e) => {
+
     e.preventDefault()
     let passwordLogin = document.getElementById('passwordUser').value
     let userLogin = document.getElementById('usuarioUser').value
@@ -183,8 +225,6 @@ formLogin.addEventListener("submit", (e) => {
     validarDatos()
     formLogin.reset()
 })
-
-// EVENT 'SUBMIT' REGISTER
 
 formRegister.addEventListener("submit", (e) => {
     e.preventDefault()
@@ -206,8 +246,6 @@ formRegister.addEventListener("submit", (e) => {
     formRegister.reset()
 })
 
-// CLICK EVENTS
-
 signWelcomeButton.addEventListener('click', () => {
     hideSignIn()
 })
@@ -217,7 +255,6 @@ volverButton.addEventListener('click', () => {
 });
 
 closeIcon.addEventListener('click', () => {
-
 
     localStorage.datosRegister = ''
     localStorage.userSign = ''
@@ -231,25 +268,114 @@ closeIcon.addEventListener('click', () => {
 
 });
 
+continueCheckoutButton.addEventListener('click', () => {
+
+    if (localStorage.counterProduct != 0) {
+
+        if (localStorage.userLogin && localStorage.userSign && localStorage.passwordLogin && localStorage.passwordSign) {
+
+            if ((localStorage.userLogin === localStorage.userSign) && (localStorage.passwordLogin === localStorage.passwordSign)) {
+
+                setTimeout(() => {
+                    location.href = "../pages/checkout.html";
+                }, 1700);
+    
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+    
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Procesando pedido aguarde un momento...'
+                })
+    
+            } else {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+    
+                Toast.fire({
+                    icon: 'error',
+                    title: 'El carrito se encuentra vacìo, añade productos para continuar con la compra'
+                })
+    
+            }
+            
+        } else{
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Por favor inicie sesiòn antes de realizar su pedido'
+            })
+        }
+
+    } else {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'El carrito se encuentra vacìo, añade productos antes de continuar con la compra'
+        })
+
+    }
+
+})
+
 // FUNCTIONS 
 
 function loginTrue() {
-    if (localStorage.getItem('userLogin') == localStorage.getItem('userSign') && (localStorage.getItem('passwordLogin') == localStorage.getItem('passwordSign'))) {
+    if ((localStorage.userLogin == localStorage.userSign) && (localStorage.passwordLogin == localStorage.passwordSign)) {
         closeIcon.className = 'fas fa-sign-out-alt'
-        personIcon.className = 'fa-solid fa-user'
-    } else{
+        personIcon.className = 'fa-solid fa-user d-none'
+    } else {
         closeIcon.className = 'fas fa-sign-out-alt d-none'
     }
-    
+
 }
 
-if (localStorage.userLogin && localStorage.userSign && localStorage.passwordLogin && localStorage.passwordSign) {    
-     loginTrue()
-} 
-
+if (localStorage.userLogin && localStorage.userSign && localStorage.passwordLogin && localStorage.passwordSign) {
+    loginTrue()
+}
 
 function validarDatos() {
-    if (localStorage.getItem('userLogin') == localStorage.getItem('userSign') && (localStorage.getItem('passwordLogin') == localStorage.getItem('passwordSign'))) {
+    if ((localStorage.userLogin == localStorage.userSign) && (localStorage.passwordLogin == localStorage.passwordSign)) {
 
         const Toast = Swal.mixin({
             toast: true,
@@ -273,7 +399,7 @@ function validarDatos() {
         }, 2000);
 
         closeIcon.className = 'fas fa-sign-out-alt'
-        personIcon.className = 'fa-solid fa-user'
+        personIcon.className = 'fa-solid fa-user d-none'
     } else {
         closeIcon.className = 'fas fa-sign-out-alt d-none'
         formLogin.reset()
@@ -329,59 +455,11 @@ function hideForm() {
 
 }
 
-function continueCheckoutLogin() {
-    if (localStorage.getItem('userLogin') == localStorage.getItem('userSign') && (localStorage.getItem('passwordLogin') == localStorage.getItem('passwordSign'))) {
-        setTimeout(() => {
-            location.href = "../pages/checkout.html";
-        }, 1700);
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'success',
-            title: 'Aguarde un momento'
-        })
-
-    } else {
-
-        setTimeout(() => {
-            location.href = "../pages/login.html";
-        }, 2000);
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Porfavor inicie sesion antes de realizar su pedido'
-        })
-    }
-
-
-}
 
 // LOGIN END!
 
 // CHECKOUT START
+
 if (document.getElementById('form')) {
 
     localStorage.nameSign = localStorage.nameSign.replace(/['"]+/g, '')
@@ -440,5 +518,6 @@ if (document.getElementById('form')) {
 function random(min, max) {
     return Math.floor((Math.random() * (max - min + 1)) + min);
 }
+
 // CHECKOUT END
 
